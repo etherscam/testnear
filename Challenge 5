@@ -1,0 +1,35 @@
+установить curl:
+  sudo apt install curl
+  
+установить зависимости для сборки:
+  apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm
+
+установить Jenkins (https://www.jenkins.io/doc/book/installing/#debianubuntu) :
+  wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+  sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+    /etc/apt/sources.list.d/jenkins.list'
+  sudo apt-get update
+  sudo apt-get install jenkins
+  
+перейти в пользователя jenkins:
+  sudo su jenkins
+  
+установить rustup и cargo (компилятор rust):
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  при установке спросит какую версию устанавливать. надо нажать 1 (default)
+  
+настроить автосборку в jenkins:
+  создать item -> задача со свободной конфигурацией
+  в блоке "Управление исходным кодом":
+    прописать репозиторий https://github.com/nearprotocol/nearcore.git
+    задать refspec +refs/tags/*:refs/remotes/origin/tags/* чтобы гит скачивал только тэги
+    задать в Branches to build значение :.*/tags/.*rc.* - это регулярка, которая матчит только тэги и только содержащие слово rc, что и требовалось в задании
+  в блоке "Триггеры сборки":
+    поставить галочку опрашивать SCM об изменениях: Jenkins будет проверять репозиторий git через кнастроенные промежутки времени и начинать сборку, если увидит, что в репозитории появилось что то новое
+    задать в расписании H/15 * * * * (т.е. опрашивать каждые 15 минут)
+  в блоке "Сборка":
+    добавить шаг "выполнить команду shell": cargo build -p neard --release (скомпилировать бинарник, все ок компилируется, найти можно в папке /var/lib/jenkins/workspace/nearcore_beta/target/release/ на серваке)
+    добавить шаг "выполнить команду shell": python3 ./scripts/parallel_run_tests.py (прогнать тесты, падает с ошибкой memory exhausted)
+    добавить шаг "выполнить команду shell": nearup testnet --nodocker --binary-path ./target/release (падает с ошибкой не найдена команда nearup)
+    
+Проверить изменения в шагах сборки можно через ручную активацию сборки: открываешь проект nearcore_beta и нажимаешь "Собрать сейчас". Через пару секунд слева в истории сборок появится новая сборка, нажимаешь прям на нее и открываешь вывод консоли. Там будут логи всех команд. 
