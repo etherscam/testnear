@@ -29,7 +29,7 @@
     задать в расписании H/15 * * * * (т.е. опрашивать каждые 15 минут)
   в блоке "Сборка":
     добавить шаг "выполнить команду shell": cargo build -p neard --release (скомпилировать бинарник, все ок компилируется, найти можно в папке /var/lib/jenkins/workspace/nearcore_beta/target/release/ на серваке)
-    добавить шаг "выполнить команду shell": python3 ./scripts/parallel_run_tests.py (прогнать тесты, падает с ошибкой memory exhausted)
-    добавить шаг "выполнить команду shell": nearup testnet --nodocker --binary-path ./target/release (падает с ошибкой не найдена команда nearup)
+    добавить шаг "выполнить команду shell": python3 ./scripts/parallel_run_tests.py (прогнать тесты, падал несколько раз с ошибкой memory exhausted )
+    добавить шаг "выполнить команду shell": nearup testnet --nodocker --binary-path ./target/release 
     
 Проверить изменения в шагах сборки можно через ручную активацию сборки: открываешь проект nearcore_beta и нажимаешь "Собрать сейчас". Через пару секунд слева в истории сборок появится новая сборка, нажимаешь прям на нее и открываешь вывод консоли. Там будут логи всех команд. 
