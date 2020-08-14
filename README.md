@@ -53,15 +53,16 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
    * in the "Assembly" block:
    
    
-    * add the step "execute shell command": 
+   
+     * add the step "execute shell command": 
        ```
        cargo build -p neard --release (compile the binary, everything is compiled, you can find it in the / var / lib / jenkins / workspace / nearcore_beta / target / release / folder on the server)
        ```
-    * add the step "execute shell command": 
+     * add the step "execute shell command": 
     ```
     python3 ./scripts/parallel_run_tests.py (run tests, crashed several times with the error memory exhausted)
     ```
-    * add "execute shell" step: 
+     * add "execute shell" step: 
     ```
     nearup testnet --nodocker --binary-path ./target/release
     ```
