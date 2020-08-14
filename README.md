@@ -6,15 +6,17 @@ Published on: August 15 2020
 This document provides one way to automatically deploy nearcore using a CI / CD pipeline using Jenkins (testnet)
 
 
-install curl:
+Install curl:
+
 ``` 
 sudo apt install curl 
 ```
  
  
-install build dependencies:
-  apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm
-
+Install build dependencies:
+``` 
+apt install -y git binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev cmake gcc g++ python docker.io protobuf-compiler libssl-dev pkg-config clang llvm
+``` 
 install  Jenkins (https://www.jenkins.io/doc/book/installing/#debianubuntu) :
   wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
   sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
