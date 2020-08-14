@@ -68,6 +68,6 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
      ```
      nearup testnet --nodocker --binary-path ./target/release
      ```
-* You can check the changes in the build steps through manual activation of the build: you open the nearcore_beta project and click "Build now". After a couple of seconds, a new assembly will appear on the left in the build history, click directly on it and open the console output. All command logs will be there.
+You can check the changes in the build steps through manual activation of the build: you open the nearcore_beta project and click "Build now". After a couple of seconds, a new assembly will appear on the left in the build history, click directly on it and open the console output. All command logs will be there.
 
 
