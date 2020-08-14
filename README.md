@@ -45,13 +45,13 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
      
      ```set refspec + refs / tags / *: refs / remotes / origin / tags / * ``` so that the git only downloads tags
      
-   ** set the value in Branches to build:. ```* / tags /.* rc. * ``` - this is a regex that matches only tags and only those containing the word "rc" (fot betanet - "beta"), which was required in the task
+   * set the value in Branches to build:. ```* / tags /.* rc. * ``` - this is a regex that matches only tags and only those containing the word "rc" (fot betanet - "beta"), which was required in the task
      
-   ** in the "Build triggers" block:   
-     check the box to poll the SCM about changes: Jenkins will check the git repository at configured intervals and start building if it sees that something new has appeared in the repository
-         *** set in the schedule ```H / 15 * * * * ```(i.e. poll every 15 minutes)
-   ** in the "Assembly" block:
-       add the step "execute shell command": 
+   * in the "Build triggers" block:   
+     * check the box to poll the SCM about changes: Jenkins will check the git repository at configured intervals and start building if it sees that something new has appeared in the repository
+     * set in the schedule ```H / 15 * * * * ```(i.e. poll every 15 minutes)
+   * in the "Assembly" block:
+       * add the step "execute shell command": 
        ```
        cargo build -p neard --release (compile the binary, everything is compiled, you can find it in the / var / lib / jenkins / workspace / nearcore_beta / target / release / folder on the server)
        ```
