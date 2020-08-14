@@ -7,7 +7,9 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
 
 
 install curl:
-``` sudo apt install curl ```
+``` 
+sudo apt install curl 
+```
  
  
 install build dependencies:
