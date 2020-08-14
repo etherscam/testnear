@@ -5,8 +5,7 @@ Published on: August 15 2020
 
 This document provides one way to automatically deploy nearcore using a CI / CD pipeline using Jenkins (testnet)
 
-1. Item 3
- Install curl:
+* Install curl:
 
  ``` 
  sudo apt install curl 
