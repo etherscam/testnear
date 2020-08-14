@@ -37,9 +37,9 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
 ```
 * Set up auto build in jenkins:
 
-   ** create item -> task with free configuration
+   * create item -> task with free configuration
    
-   ** in the section "Source Code Management":
+   * in the section "Source Code Management":
    
      register the repository https://github.com/nearprotocol/nearcore.git
      
@@ -48,8 +48,8 @@ This document provides one way to automatically deploy nearcore using a CI / CD 
    * set the value in Branches to build:. ```* / tags /.* rc. * ``` - this is a regex that matches only tags and only those containing the word "rc" (fot betanet - "beta"), which was required in the task
      
    * in the "Build triggers" block:   
-     * check the box to poll the SCM about changes: Jenkins will check the git repository at configured intervals and start building if it sees that something new has appeared in the repository
-     * set in the schedule ```H / 15 * * * * ```(i.e. poll every 15 minutes)
+      check the box to poll the SCM about changes: Jenkins will check the git repository at configured intervals and start building if it sees that something new has appeared in the repository
+      set in the schedule ```H / 15 * * * * ```(i.e. poll every 15 minutes)
    * in the "Assembly" block:
        * add the step "execute shell command": 
        ```
